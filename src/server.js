@@ -1,19 +1,17 @@
 const app = require('./app');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
-dotenv.config();
+// Connect to Database
+connectDB();
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/fonify';
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
+// For Vercel, we shouldn't call listen if it's being imported as a serverless function
+// But for local development, we still need it.
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
-  mongoose.connect(MONGO_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => {
-      console.error('Database connection error:', err);
-      console.log('TIP: Check if your IP is whitelisted in MongoDB Atlas or if your connection string is correct.');
-    });
-});
+module.exports = app;
