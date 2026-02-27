@@ -7,7 +7,7 @@ const {
   updateListing,
   deleteListing,
   getMyListings
-} = require('../controllers/listingController');
+} = require('../controllers/listing');
 const { protect } = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
 

@@ -36,6 +36,17 @@ const listingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  locationData: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      required: false
+    }
+  },
   specifications: {
     storage: String,
     ram: String,
@@ -59,5 +70,7 @@ const listingSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
+
+listingSchema.index({ locationData: '2dsphere' });
 
 module.exports = mongoose.model('Listing', listingSchema);

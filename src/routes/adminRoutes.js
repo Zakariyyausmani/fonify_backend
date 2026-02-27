@@ -7,7 +7,7 @@ const {
   updateUserRole,
   getPendingVerifications,
   updateUserVerificationStatus
-} = require('../controllers/adminController');
+} = require('../controllers/admin');
 const { protect, admin } = require('../middleware/authMiddleware');
 
 router.use(protect);

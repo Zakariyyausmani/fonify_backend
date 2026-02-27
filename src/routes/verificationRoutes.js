@@ -6,7 +6,7 @@ const {
   assignAgent,
   submitReport,
   getReportByListing
-} = require('../controllers/verificationController');
+} = require('../controllers/verification');
 const { protect, agent } = require('../middleware/authMiddleware');
 
 router.use(protect);
