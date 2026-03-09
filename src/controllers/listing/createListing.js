@@ -28,6 +28,12 @@ exports.createListing = async (req, res) => {
     const createdListing = await listing.save();
     res.status(201).json(createdListing);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('--- Create Listing Error ---');
+    console.error(error);
+    res.status(500).json({
+      message: 'Failed to create listing',
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 };
