@@ -40,7 +40,7 @@ const listingSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      default: 'Point'
+      required: false
     },
     coordinates: {
       type: [Number], // [longitude, latitude]
@@ -66,6 +66,18 @@ const listingSchema = new mongoose.Schema({
   views: {
     type: Number,
     default: 0
+  },
+  imei: {
+    type: String,
+    trim: true,
+    sparse: true // Allows multiple null/undefined values but enforces uniqueness for non-null
+  },
+  imeiVerificationResult: {
+    isValid: Boolean,
+    brand: String,
+    model: String,
+    blacklistStatus: String,
+    rawResponse: Object
   }
 }, {
   timestamps: true
