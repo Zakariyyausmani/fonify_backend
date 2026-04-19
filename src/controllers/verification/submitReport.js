@@ -1,5 +1,6 @@
 const VerificationReport = require('../../models/VerificationReport');
 const Listing = require('../../models/Listing');
+const User = require('../../models/User');
 const { createNotification } = require('../notificationController');
 
 // @desc    Submit verification report
@@ -31,6 +32,17 @@ exports.submitReport = async (req, res) => {
       'verification_ready',
       listing._id
     );
+
+    const admins = await User.find({ role: 'admin' });
+    for (const admin of admins) {
+      await createNotification(
+        admin._id,
+        'Report Submitted',
+        `${req.user.name} has submitted a verification report for ${listing.brand} ${listing.model}.`,
+        'agent_report_submitted',
+        listing._id
+      );
+    }
 
     res.json(report);
   } catch (error) {

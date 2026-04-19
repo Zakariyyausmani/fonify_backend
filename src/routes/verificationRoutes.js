@@ -5,7 +5,8 @@ const {
   getVerificationRequests,
   assignAgent,
   submitReport,
-  getReportByListing
+  getReportByListing,
+  scheduleMeeting
 } = require('../controllers/verification');
 const { protect, agent } = require('../middleware/authMiddleware');
 
@@ -17,6 +18,7 @@ router.get('/listing/:listingId', getReportByListing);
 // Agent restricted routes
 router.get('/requests', agent, getVerificationRequests);
 router.put('/:id/assign', agent, assignAgent);
+router.put('/:id/schedule', agent, scheduleMeeting);
 router.put('/:id/submit', agent, submitReport);
 
 module.exports = router;

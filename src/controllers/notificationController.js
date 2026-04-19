@@ -1,4 +1,5 @@
 const Notification = require('../models/Notification');
+const { getIO } = require('../services/socketManager');
 
 // @desc    Get user notifications
 // @route   GET /api/notifications
@@ -41,6 +42,12 @@ exports.createNotification = async (userId, title, message, type, relatedId) => 
       relatedId
     });
     await notification.save();
+
+    try {
+      getIO().to(userId.toString()).emit('new_notification', notification);
+    } catch (socketErr) {
+      console.log('Socket broadcast failed (User offline?):', socketErr.message);
+    }
   } catch (error) {
     console.error('Create notification error:', error);
   }

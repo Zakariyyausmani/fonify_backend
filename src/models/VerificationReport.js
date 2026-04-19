@@ -17,8 +17,14 @@ const verificationReportSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['requested', 'assigned', 'completed', 'cancelled'],
+    enum: ['requested', 'assigned', 'negotiating', 'meeting_scheduled', 'completed', 'cancelled'],
     default: 'requested'
+  },
+  negotiatedRate: {
+    type: String
+  },
+  meetingPoint: {
+    type: String
   },
   checks: {
     imeiStatus: String,

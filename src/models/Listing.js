@@ -58,6 +58,14 @@ const listingSchema = new mongoose.Schema({
     enum: ['pending', 'approved', 'rejected', 'sold'],
     default: 'pending'
   },
+  isFeatured: {
+    type: Boolean,
+    default: false
+  },
+  featuredExpiry: {
+    type: Date,
+    default: null
+  },
   verificationStatus: {
     type: String,
     enum: ['not_verified', 'pending', 'verified', 'failed'],

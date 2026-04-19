@@ -20,6 +20,15 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    enum: ['text', 'image', 'offer', 'offer_response'],
+    default: 'text'
+  },
+  offerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Offer'
+  },
   isRead: {
     type: Boolean,
     default: false

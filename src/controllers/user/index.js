@@ -4,6 +4,8 @@ const { getFavorites } = require('./getFavorites');
 const { toggleFavorite } = require('./toggleFavorite');
 const { verifyIdentity } = require('./verifyIdentity');
 const { updateShopInfo } = require('./updateShopInfo');
+const { getPublicProfile } = require('./getPublicProfile');
+const { getAdminContact } = require('./getAdminContact');
 
 module.exports = {
   toggleMode,
@@ -11,5 +13,7 @@ module.exports = {
   getFavorites,
   toggleFavorite,
   verifyIdentity,
-  updateShopInfo
+  updateShopInfo,
+  getPublicProfile,
+  getAdminContact
 };
