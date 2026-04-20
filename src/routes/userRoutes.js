@@ -1,23 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { toggleMode, updateProfile, getFavorites, toggleFavorite, verifyIdentity, updateShopInfo, getPublicProfile, getAdminContact } = require('../controllers/user');
+const multer = require('multer');
+const path = require('path');
 const { protect } = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
+const {
+  updateProfileImage,
+  toggleBookmark,
+  getBookmarks
+} = require('../controllers/userController');
 
-router.use(protect); // All user routes are protected
+const { storage } = require('../config/cloudinaryConfig');
+const upload = multer({ storage });
 
-router.put('/toggle-mode', toggleMode);
-router.put('/profile', upload.fields([{ name: 'profileImage', maxCount: 1 }]), updateProfile);
-router.post('/profile', upload.fields([{ name: 'profileImage', maxCount: 1 }]), updateProfile);
-router.put('/setup-shop', updateShopInfo);
-router.get('/favorites', getFavorites);
-router.post('/favorites/:id', toggleFavorite);
-router.get('/admin-contact', getAdminContact);
-router.get('/:id/public', getPublicProfile);
-router.post('/verify-identity', upload.fields([
-  { name: 'cnicFront', maxCount: 1 },
-  { name: 'cnicBack', maxCount: 1 },
-  { name: 'selfie', maxCount: 1 }
-]), verifyIdentity);
+router.post('/profile-image', protect, upload.single('image'), updateProfileImage);
+router.post('/bookmarks/:ruleId', protect, toggleBookmark);
+router.get('/bookmarks', protect, getBookmarks);
+router.get('/profile', protect, require('../controllers/userController').getProfile);
 
 module.exports = router;
