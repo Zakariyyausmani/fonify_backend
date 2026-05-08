@@ -1,15 +1,25 @@
 const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('../config/cloudinary');
+const path = require('path');
+const fs = require('fs');
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'fonify_listings',
-    allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
-  },
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.memoryStorage();
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    const filetypes = /csv|xlsx|xls/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    if (extname) {
+      return cb(null, true);
+    }
+    cb(new Error('Only .csv, .xlsx, or .xls files are allowed!'));
+  }
 });
-
-const upload = multer({ storage: storage });
 
 module.exports = upload;

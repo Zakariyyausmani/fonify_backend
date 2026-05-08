@@ -1,0 +1,21 @@
+ruleNumber,title,description,category,fineAmount,punishment,severity
+TRAF-001,Exceeding Speed Limit,Driving faster than the posted speed limit in a residential zone.,Traffic,500,Fine and 2 points,Medium
+TRAF-002,Red Light Violation,Failure to stop at a red signal at a major intersection.,Traffic,1000,Fine and license point,High
+TRAF-003,Driving Without License,Operating a motor vehicle without a valid driver's license.,Traffic,2500,Impoundment of vehicle,Critical
+TRAF-004,Illegal U-Turn,Making a U-turn where prohibited by signage or road markings.,Traffic,300,Fine Only,Low
+TRAF-005,DUI (Alcohol/Drugs),Driving under the influence of intoxicating substances.,Traffic,5000,License suspension and jail time,Critical
+SAFE-001,Failure to Wear Seatbelt,Driver or passenger not using available seatbelts while moving.,Safety,200,Fine Only,Low
+SAFE-002,Helmet Violation,Operating a motorcycle or bicycle without a protective helmet.,Safety,250,Fine Only,Medium
+SAFE-003,Child Seat Negligence,Failure to use an approved child safety seat for infants.,Safety,600,Mandatory safety course,High
+DOC-001,Expired Vehicle Registration,Operating a vehicle with registration that has expired.,Documentation,450,Fine and impoundment risk,Medium
+DOC-002,Lack of Insurance,Operating a vehicle without valid third-party insurance.,Documentation,1500,Suspension of registration,High
+ENV-001,Excessive Smoke Emission,Operating a vehicle that emits visible black smoke beyond limits.,Environment,800,Mandatory maintenance check,Medium
+ENV-002,Illegal Waste Disposal,Dumping hazardous waste or debris on public highways.,Environment,3000,Community service and fine,Critical
+PARK-001,Blocking Fire Hydrant,Parking within 3 meters of a public fire hydrant.,Parking,400,Immediate towing,High
+PARK-002,Double Parking,Parking a vehicle on the roadway side of another parked vehicle.,Parking,350,Fine Only,Medium
+PARK-003,Handicap Zone Violation,Parking in a space reserved for persons with disabilities.,Parking,1200,Fine and vehicle removal,High
+BUS-001,Unauthorized Route (Commercial),Commercial vehicles operating on restricted residential roads.,Public Transit,900,Company penalty,Medium
+BUS-002,Overloading Passengers,Carrying more passengers than the vehicle's safe capacity.,Public Transit,1100,Fine and driver warning,High
+PED-001,Jaywalking,Crossing a high-speed roadway outside of designated crosswalks.,Pedestrian,100,Safety warning,Low
+PED-002,Obstructing Sidewalk,Placing objects or stalls that block pedestrian movement.,Pedestrian,250,Removal of obstruction,Medium
+PED-003,Violation of Pedestrian Right-of-Way,Failure to yield to pedestrians in a marked crosswalk.,Pedestrian,600,Fine and 1 point,High

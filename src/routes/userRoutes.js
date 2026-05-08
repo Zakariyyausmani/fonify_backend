@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const { toggleMode, updateProfile, getFavorites, toggleFavorite, verifyIdentity, updateShopInfo, getPublicProfile, getAdminContact } = require('../controllers/user');
 const { protect } = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
+const { storage } = require('../config/cloudinaryConfig');
 
-router.use(protect); // All user routes are protected
+const upload = multer({ storage });
+
+router.use(protect);
 
 router.put('/toggle-mode', toggleMode);
 router.put('/profile', upload.fields([{ name: 'profileImage', maxCount: 1 }]), updateProfile);

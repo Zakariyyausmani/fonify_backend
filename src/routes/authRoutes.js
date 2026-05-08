@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const {
-  register,
-  login,
-  getProfile,
-  sendOtp,
-  verifyOtp,
-  requestEmailChange,
-  verifyOldEmail,
-  confirmNewEmail
-} = require('../controllers/auth');
+const { 
+  register, 
+  login, 
+  sendOtp, 
+  verifyOtp, 
+  getProfile, 
+  requestEmailChange, 
+  verifyOldEmail, 
+  confirmNewEmail 
+} = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
-
 const { registerValidationRules, loginValidationRules, validate } = require('../middleware/validation');
 
 router.post('/register', registerValidationRules(), validate, register);
