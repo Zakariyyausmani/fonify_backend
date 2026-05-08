@@ -13,6 +13,10 @@ exports.login = async (req, res) => {
     });
 
     if (user && (await user.comparePassword(password))) {
+      if (user.isSuspended) {
+        return res.status(403).json({ message: `Account Suspended: ${user.suspendReason || 'Violation of platform policies.'}` });
+      }
+
       res.json({
         _id: user._id,
         name: user.name,

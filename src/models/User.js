@@ -28,7 +28,11 @@ const userSchema = new mongoose.Schema({
     storeName: { type: String, trim: true },
     description: { type: String, trim: true },
     address: { type: String, trim: true }
-  }
+  },
+  averageRating: { type: Number, default: 0 },
+  reviewCount: { type: Number, default: 0 },
+  isSuspended: { type: Boolean, default: false },
+  suspendReason: { type: String, trim: true }
 }, { timestamps: true });
 
 // Hash password before saving

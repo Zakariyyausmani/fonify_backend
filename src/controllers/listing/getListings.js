@@ -6,13 +6,14 @@ const APIFeatures = require('../../utils/apiFeatures');
 // @access  Public
 exports.getListings = async (req, res) => {
   try {
-    const { brand, model, condition, minPrice, maxPrice, location, lat, lng, distance, page, limit } = req.query;
+    const { brand, model, condition, minPrice, maxPrice, location, lat, lng, distance, page, limit, featured } = req.query;
     let queryObj = { status: 'approved' };
 
     if (brand) queryObj.brand = brand;
     if (model) queryObj.model = model;
     if (condition) queryObj.condition = condition;
     if (location) queryObj.location = location;
+    if (featured === 'true') queryObj.isFeatured = true;
 
     // Nearby Search
     if (lat && lng) {

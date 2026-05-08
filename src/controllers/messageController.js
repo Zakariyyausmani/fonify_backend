@@ -1,4 +1,5 @@
 const Message = require('../models/Message');
+const socketManager = require('../services/socketManager');
 
 // @desc    Send a message
 // @route   POST /api/messages
@@ -15,6 +16,16 @@ exports.sendMessage = async (req, res) => {
     });
 
     const savedMessage = await message.save();
+
+    // Real-time socket emission
+    try {
+      const io = socketManager.getIO();
+      // Emit to receiver's personal room
+      io.to(receiverId).emit('receive_message', savedMessage);
+    } catch (socketError) {
+      console.error('Socket emission failed:', socketError.message);
+    }
+
     res.status(201).json(savedMessage);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -60,16 +71,19 @@ exports.getConversations = async (req, res) => {
     const seen = new Set();
 
     for (const msg of messages) {
+      if (!msg.senderId || !msg.receiverId) continue; // Safety guard for deleted users
+
       const otherUser = msg.senderId._id.toString() === req.user._id.toString() ? msg.receiverId : msg.senderId;
-      const conversationKey = `${msg.listingId._id}_${otherUser._id}`;
+      const safeListingId = msg.listingId ? msg.listingId._id.toString() : '000000000000000000000000';
+      const conversationKey = `${safeListingId}_${otherUser._id.toString()}`;
 
       if (!seen.has(conversationKey)) {
         conversations.push({
-          listing: msg.listingId,
+          listing: msg.listingId || { brand: 'Platform', model: 'Support Chat', price: 0 },
           otherUser: otherUser,
           lastMessage: msg.content,
           lastMessageTime: msg.createdAt,
-          listingId: msg.listingId._id,
+          listingId: safeListingId,
           otherUserId: otherUser._id
         });
         seen.add(conversationKey);

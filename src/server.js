@@ -37,11 +37,18 @@ app.use((err, req, res, next) => {
 // Server Configuration
 const PORT = process.env.PORT || 5000;
 
+const http = require('http');
+const server = http.createServer(app);
+const socketManager = require('./services/socketManager');
+
+// Initialize Socket.io
+socketManager.init(server);
+
 // Listen for requests
 if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 }
 
-module.exports = app;
+module.exports = server;
