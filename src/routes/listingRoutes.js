@@ -6,7 +6,8 @@ const {
   createListing,
   updateListing,
   deleteListing,
-  getMyListings
+  getMyListings,
+  getSellerAnalytics
 } = require('../controllers/listing');
 const { protect } = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
@@ -15,6 +16,7 @@ const { listingValidationRules, validate } = require('../middleware/validation')
 
 router.get('/', getListings);
 router.get('/my-listings', protect, getMyListings);
+router.get('/my-analytics', protect, getSellerAnalytics);
 router.get('/:id', getListingById);
 router.post('/', protect, upload.array('images', 5), listingValidationRules(), validate, createListing);
 router.put('/:id', protect, upload.array('images', 5), listingValidationRules(), validate, updateListing);

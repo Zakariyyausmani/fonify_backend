@@ -58,6 +58,18 @@ const listingSchema = new mongoose.Schema({
     enum: ['pending', 'approved', 'rejected', 'sold'],
     default: 'pending'
   },
+  views: {
+    type: Number,
+    default: 0
+  },
+  clicks: {
+    type: Number,
+    default: 0
+  },
+  chatRequests: {
+    type: Number,
+    default: 0
+  },
   isFeatured: {
     type: Boolean,
     default: false
