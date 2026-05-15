@@ -9,7 +9,7 @@ const {
   requestEmailChange, 
   verifyOldEmail, 
   confirmNewEmail 
-} = require('../controllers/authController');
+} = require('../controllers/auth');
 const { protect } = require('../middleware/authMiddleware');
 const { registerValidationRules, loginValidationRules, validate } = require('../middleware/validation');
 
